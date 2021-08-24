@@ -1,0 +1,24 @@
+---
+- name: cli command playbook
+  hosts: cisco
+  gather_facts: no
+  vars:
+    ansible_connection: network_cli
+
+  tasks:
+    - name: Configure port security on ports g1-2
+      cisco.ios.ios_config:
+        lines: 
+        -  switchport port-security
+        parents: '{{ item }}'
+      
+      with_items:
+      - interface Ethernet1
+      - interface Ethernet2
+    
+    - name: Check ports 3-48 for dot1x config
+      cisco.ios.ios_config:
+        diff_against: intended
+        intended_config: "{{ lookup('file', 'master.cfg') }}"      
+         
+

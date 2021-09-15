@@ -1,0 +1,23 @@
+---
+- name: configure Cisco IOS ACLs
+  cisco.ios.ios_acls:
+    config:
+    - afi: ipv4
+      acls:
+      - name: test
+        acl_type: extended
+        aces:
+        - grant: deny
+          protocol_options:
+            icmp:
+              echo_reply: no
+          source:
+            address: 10.10.10.0
+            wildcard_bits: 0.0.0.255
+          destination:
+            address: 172.10.20.0
+            wildcard_bits: 0.0.0.255
+            port_protocol:
+              eq: telnet
+    state: merged
+              

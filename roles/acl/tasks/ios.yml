@@ -1,23 +1,40 @@
 ---
-- name: configure Cisco IOS ACLs
+- name: Gather configuration
+  cisco.ios.ios_facts:
+    gather_subset:
+      - config
+
+- name: Gather ACL Info
   cisco.ios.ios_acls:
-    config:
-    - afi: ipv4
-      acls:
-      - name: test
-        acl_type: extended
-        aces:
-        - grant: deny
-          protocol_options:
-            icmp:
-              echo_reply: no
-          source:
-            address: 10.10.10.0
-            wildcard_bits: 0.0.0.255
-          destination:
-            address: 172.10.20.0
-            wildcard_bits: 0.0.0.255
-            port_protocol:
-              eq: telnet
-    state: merged
-              
+    state: gathered
+    running_config: "{{ ansible_net_config }}"
+  register: ios_acl
+
+- name: Render ACL info
+  cisco.ios.ios_acls:
+    state: rendered
+    config: "{{ ios_acl.gathered }}"
+  register: ios_acl_rendered
+
+- name: Set current ACL as fact
+  set_fact:
+  existing_acl: "{{ ios_acl_rendered.rendered }}"
+
+- name: Push data to hostvars
+  lineinfile:
+    create: yes
+    line: "{{ lookup('template','acl.j2') }}"
+    path: "{{playbook_dir}}/host_vars/{{inventory_hostname}}.yml"
+  when: acl_config is not defined 
+
+# Below are example tasks for parsing the acl_config hostvar we create and then use that to configure the device
+- name: Parse ACL
+  cisco.ios.ios_acls:
+    state: parsed
+    running_config: "{{ acl_config }}" #Found in host_vars/{{device}}.yml
+  register: ios_acl
+ 
+- name: Configure ACL
+  cisco.ios.ios_acls:
+    state: replaced
+    config: "{{ ios_acl.parsed }} 

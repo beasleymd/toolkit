@@ -18,7 +18,7 @@
 
 - name: Set current ACL as fact
   set_fact:
-  existing_acl: "{{ ios_acl_rendered.rendered }}"
+    existing_acl: "{{ ios_acl_rendered.rendered }}"
 
 - name: Push data to hostvars
   lineinfile:

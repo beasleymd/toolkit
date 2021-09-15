@@ -1,6 +1,6 @@
 ---
 - name: configure ACLs
-  hosts: cisco
+  hosts: arista
   gather_facts: no
 
   tasks:

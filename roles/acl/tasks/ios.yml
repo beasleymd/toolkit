@@ -1,6 +1,6 @@
 ---
 - name: configure Cisco IOS ACLs
-  ios_acls:
+  cisco.ios.ios_acls:
     config:
     - afi: ipv4
       acls:

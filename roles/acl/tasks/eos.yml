@@ -7,5 +7,5 @@
  
 - name: Configure ACL
   arista.eos.eos_acls:
-    state: replaced
+    state: merged
     config: "{{ eos_acl.parsed }}" 

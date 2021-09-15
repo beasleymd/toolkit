@@ -11,13 +11,13 @@
           protocol_options:
             icmp:
               echo_reply: no
-              source:
-                address: 10.10.10.0
-                wildcard_bits: 0.0.0.255
-              destination:
-                address: 172.10.20.0
-                wildcard_bits: 0.0.0.255
-                port_protocol:
-                  eq: telnet
+          source:
+            address: 10.10.10.0
+            wildcard_bits: 0.0.0.255
+          destination:
+            address: 172.10.20.0
+            wildcard_bits: 0.0.0.255
+            port_protocol:
+              eq: telnet
     state: merged
               

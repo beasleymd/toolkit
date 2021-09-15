@@ -37,4 +37,4 @@
 - name: Configure ACL
   cisco.ios.ios_acls:
     state: replaced
-    config: "{{ ios_acl.parsed }} 
+    config: "{{ ios_acl.parsed }}" 

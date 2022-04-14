@@ -1,6 +1,6 @@
 ---
 - name: configure ACLs
-  hosts: arista
+  hosts: routers
   gather_facts: no
 
   tasks:

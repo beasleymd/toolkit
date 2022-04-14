@@ -1,6 +1,6 @@
 ---
 - name: setup control node timestamp
-  hosts: ansible-1
+  hosts: ec2-3-223-114-51.compute-1.amazonaws.com
   gather_facts: no
   become: yes
   tasks:
@@ -19,7 +19,7 @@
         state: directory
 
 - name: retrieve router configurations
-  hosts: all
+  hosts: routers
   gather_facts: no
 
   tasks:
@@ -40,7 +40,7 @@
 
 
 - name: backup router configurations
-  hosts: ansible-1
+  hosts: ec2-3-223-114-51.compute-1.amazonaws.com
   gather_facts: no
   tasks:
     - name: find backups

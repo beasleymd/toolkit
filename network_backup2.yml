@@ -44,7 +44,7 @@
     - name: save configuration to backup server
       copy:
         src: "{{ config_output.backup_path }}"
-        dest: "/backup/{{hostvars['backup-server'].datetime}}/"
+        dest: "/backup/{{hostvars['ec2-3-223-114-51.compute-1.amazonaws.com'].datetime}}/"
       when: config_output is defined
       become: true
       delegate_to: ec2-3-223-114-51.compute-1.amazonaws.com

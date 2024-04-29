@@ -37,5 +37,11 @@
               redistribute:
                 - ospf:
                     process_id: 1
+    - name: Verify BGP is running
+      cisco.ios.command:
+        commands:
+          - show ip bgp
+          - sh ip bgp neighbor 10.200.200.1
+          - sh ip route
   
           

@@ -14,9 +14,9 @@
           neighbor:
             - address: 10.200.200.1
               remote_as: 65000  
-              ebgp_multihop:
-                  enable: true
-                  hop_count: 255
+#              ebgp_multihop:
+#                  enable: true
+#                  hop_count: 255
     - name: configure address family BGP
       cisco.ios.ios_bgp_address_family:
         config:

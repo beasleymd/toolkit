@@ -12,7 +12,7 @@
             router_id:
               address: 192.168.2.2
           neighbor:
-            - address: 10.200.200.1
+            - neighbor_address: 10.200.200.1
               remote_as: 65000  
 #              ebgp_multihop:
 #                  enable: true
